@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Chapter10 {
 	 public static void main(String[] args) throws Exception {
@@ -15,25 +15,19 @@ public class Chapter10 {
 	        // 以下記述
 	        
 	        //未完了タスクを抽出	        
-	        List<Task> incompleteTasks = new ArrayList<>();
-	        for (Task task : list) {
-	            if (!task.isDone()) {
-	                incompleteTasks.add(task);
-	            }
-	        }
-	        
-	        //昇順に並べ替え	
-	        Collections.sort(incompleteTasks);
+	        List<Task> incompleteTasks = list.stream()
+	                .filter(task -> !task.isDone())
+	                .sorted()
+	                .collect(Collectors.toList());
+
+
 	        
 	     // 未完了のタスク数を表示
 	        System.out.println("未完了のタスクの個数は" + incompleteTasks.size());
 	        
 	     // タスク一覧を表示
 	        System.out.println("【未完了のタスクを昇順に並び替えて一覧表示】");
-	        for (Task task : incompleteTasks) {
-	            System.out.println(task);
-	        }
-
-	    }
+	        incompleteTasks.forEach(System.out::println);
+	    	}
 
 }
