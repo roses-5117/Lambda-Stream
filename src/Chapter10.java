@@ -16,7 +16,7 @@ public class Chapter10 {
 	        
 	        //未完了タスクを抽出	        
 	        List<Task> incompleteTasks = list.stream()
-	                .filter(task -> !task.isDone())
+	                .filter(task -> task.isDone() == false)
 	                .sorted()
 	                .collect(Collectors.toList());
 
